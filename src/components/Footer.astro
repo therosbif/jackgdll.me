@@ -2,10 +2,10 @@
 const today = new Date();
 ---
 
-<footer>
+<footer class="px-1 pb-6 pt-4 text-center text-slate-600">
 	&copy; {today.getFullYear()} Jack Goodall. All rights reserved.
-	<div class="social-links">
-		<a href="https://github.com/therosbif" target="_blank">
+	<div class="flex justify-center gap-1 mt-1 ">
+		<a href="https://github.com/therosbif" target="_blank" class="hover:text-slate-700">
 			<span class="sr-only">Go to Jack Goodalls's GitHub repo</span>
 			<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/github"
 				><path
@@ -14,34 +14,11 @@ const today = new Date();
 				></path></svg
 			>
 		</a>
-		<a href="mailto:jack.goodall@epitech.eu">
-			<span>Contact Jack Goodall by email</span>
-
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/email"><path
-					fill="currentColor"
-					d="M14.5 0h-13C.673 0 0 .673 0 1.5v13C0 15.327.673 16 1.5 16h13c.827 0 1.5-.673 1.5-1.5v-13C16 .673 15.327 0 14.5 0zM14 14H2V4l6 3 6-3v10zm0-11.5L8 9.5 2 2.5h12z"
-				></path></svg>
+		<a href="mailto:jack.goodall@epitech.eu" class="hover:text-slate-700">
+			<span class="sr-only">Contact Jack Goodall by email</span>
+			<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" astro-icon="social/email">
+				<path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="#080341"/>
+				</svg>
 		</a>
 	</div>
 </footer>
-<style>
-	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
-		text-align: center;
-	}
-	.social-links {
-		display: flex;
-		justify-content: center;
-		gap: 1em;
-		margin-top: 1em;
-	}
-	.social-links a {
-		text-decoration: none;
-		color: rgb(var(--gray));
-	}
-	.social-links a:hover {
-		color: rgb(var(--gray-dark));
-	}
-</style>

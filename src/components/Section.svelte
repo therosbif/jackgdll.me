@@ -24,7 +24,7 @@
 </script>
 
 <section
-  class="prose-headings:underline transition-all border-2 justify-center prose-p:prose prose-headings:text-4xl prose-h1:h-min {classes}"
+  class="prose-headings:underline transition-all border-r-2 border-b-2 justify-center prose-p:prose prose-headings:text-4xl prose-h1:h-min {classes}"
 >
   <details bind:open>
     <summary class="list-none h-full transition-all">
@@ -34,10 +34,24 @@
         <h1>{title}</h1>
       {/if}
     </summary>
-    <sub class="text-slate-500"
-      >{startDate?.toLocaleDateString() ?? ""} - {endDate?.toLocaleDateString() ??
-        "Present"} ({timeDiff})</sub
-    >
+    <sub class="text-slate-500">
+      <time datetime={startDate.toISOString()}>
+        {startDate.toLocaleDateString("en-gb", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })}
+      </time>
+      -
+      <time datetime={(endDate ?? new Date()).toISOString()}>
+        {endDate?.toLocaleDateString("en-gb", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        }) ?? "Present"}
+      </time>
+      ({timeDiff})
+    </sub>
     <hr class="my-4" />
     <p>{body}</p>
   </details>
