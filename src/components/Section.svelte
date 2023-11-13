@@ -1,9 +1,9 @@
 <script lang="ts">
   export let title: string;
-  export let body: string;
   export let startDate: Date;
   export let endDate: Date | undefined;
   export let logo: string;
+  export let showTitle = false;
 
   export let open = false;
 
@@ -19,19 +19,27 @@
   }
 
   $: classes = open
-    ? "max-w-xl p-4 pr-12"
+    ? "min-w-fit w-5/12 p-4"
     : "flex w-24 items-center [&>details>summary]:rotate-90";
 </script>
 
 <section
-  class="prose-headings:underline transition-all border-r-2 border-b-2 justify-center prose-p:prose prose-headings:text-4xl prose-h1:h-min {classes}"
+  class=" prose-h2:text-xl prose-h1:font-extrabold prose-h1:font-serif prose-headings:underline transition-all border-r-2 border-b-2 justify-center prose-h1:text-4xl prose-h1:h-min {classes}"
 >
   <details bind:open>
-    <summary class="list-none h-full transition-all">
+    {#if open && showTitle}
+      <h1 class="whitespace-nowrap">{title}</h1>
+    {/if}
+    <summary class="list-none h-full transition-all cursor-pointer">
       {#if open}
-        <img src={logo} alt="{title} logo" class="max-h-20" />
+        <img
+          src={logo}
+          alt="{title} logo"
+          class="max-h-52 m-4 shadow-lg"
+          class:float-left={showTitle}
+        />
       {:else}
-        <h1>{title}</h1>
+        <h1 class="whitespace-nowrap">{title}</h1>
       {/if}
     </summary>
     <sub class="text-slate-500">
@@ -53,6 +61,8 @@
       ({timeDiff})
     </sub>
     <hr class="my-4" />
-    <p>{body}</p>
+    <article class="prose-p:mt-4 prose max-w-full prose-p:font-mono">
+      <slot />
+    </article>
   </details>
 </section>

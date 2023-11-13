@@ -4,6 +4,7 @@ import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import Section from "../components/Section.svelte";
 import { getCollection } from "astro:content";
+import * as JackGdll from "../jackgdll.md";
 
 const experiences = (await getCollection("experience")).sort(
   (a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf(),
@@ -16,19 +17,32 @@ const experiences = (await getCollection("experience")).sort(
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
   <body class="h-screen">
-    <main class="flex h-full">
+    <main class="flex h-full overflow-x-auto">
+      <Section
+        open
+        showTitle
+        client:visible
+        title={JackGdll.frontmatter.title}
+        startDate={new Date(JackGdll.frontmatter?.startDate)}
+        logo={JackGdll.frontmatter.logo}
+      >
+        <JackGdll.Content />
+      </Section>
       {
-        experiences.map(({ data, body }) => (
-          <Section
-            open
-            client:visible
-            title={data.title}
-            {body}
-            startDate={data.startDate}
-            endDate={data.endDate}
-            logo={data.logo}
-          />
-        ))
+        experiences.map(async ({ data, render }) => {
+          const Component = await render();
+          return (
+            <Section
+              client:visible
+              title={data.title}
+              startDate={data.startDate}
+              endDate={data.endDate}
+              logo={data.logo}
+            >
+              <Component.Content />
+            </Section>
+          );
+        })
       }
     </main>
     <Footer />
